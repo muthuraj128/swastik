@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   ArrowLeft,
   ArrowRight,
   MapPin,
-  MessageCircle,
   MessageSquare,
   Phone,
   Send,
@@ -13,19 +13,19 @@ import {
   Layers,
 } from 'lucide-react';
 import facadeImg from './assets/facade.jpg';
-import bathroomGlassImg from './assets/products/Bathroom & Glass Fittings.png';
-import doorHardwareImg from './assets/products/door hardware.png';
-import modularKitchenImg from './assets/products/Modular Kitchen Fittings.png';
-import plywoodLaminatesImg from './assets/products/Plywood & Laminates.png';
-import slidingAluminiumImg from './assets/products/Sliding & Aluminium Systems.png';
-import toolsIndustrialImg from './assets/products/Tools & Industrial Hardware.png';
+import bathroomGlassImg from './assets/categories/Bathroom & Glass Fittings.png';
+import doorHardwareImg from './assets/categories/door hardware.png';
+import modularKitchenImg from './assets/categories/Modular Kitchen Fittings.png';
+import plywoodLaminatesImg from './assets/categories/Plywood & Laminates.png';
+import slidingAluminiumImg from './assets/categories/Sliding & Aluminium Systems.png';
+import toolsIndustrialImg from './assets/categories/Tools & Industrial Hardware.png';
 import './App.css';
 
 const brandModules = import.meta.glob('./assets/brands/*.webp', {
   eager: true,
   import: 'default',
 }) as Record<string, string>;
-const brandLogos = Object.values(brandModules).sort();
+const brandLogos = Object.values(brandModules).sort((a, b) => a.localeCompare(b));
 
 const IMAGES = [
   {
@@ -34,13 +34,13 @@ const IMAGES = [
     bg: '#B56B4E',
   },
   {
-    name: 'Plywood & Laminates',
+    name: 'Plywood & Boards',
     src: plywoodLaminatesImg,
     bg: '#C8A96B',
     lift: '-35%',
   },
   {
-    name: 'Modular Kitchen Fittings',
+    name: 'Kitchen Fittings',
     src: modularKitchenImg,
     bg: '#7E8FA5',
   },
@@ -83,6 +83,8 @@ const TESTIMONIALS = [
 ];
 
 function App() {
+  const routerNavigate = useNavigate();
+  const location = useLocation();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isAboutVisible, setIsAboutVisible] = useState(false);
@@ -105,7 +107,7 @@ function App() {
       const current = video.currentTime;
       const duration = video.duration;
 
-      if (duration && !isNaN(duration)) {
+      if (duration && !Number.isNaN(duration)) {
         let opacity = 1;
         const fadeDuration = 0.5; // 0.5s fade in/out
 
@@ -174,6 +176,15 @@ function App() {
   }, []);
 
   useEffect(() => {
+    if (!location.hash) return;
+    const targetId = location.hash.replace('#', '');
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location.hash]);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsTestimonialsVisible(entry.isIntersecting);
@@ -229,7 +240,7 @@ function App() {
     setIsMenuOpen(false);
   };
 
-  const navigate = (direction: 'next' | 'prev') => {
+  const cycleCarousel = (direction: 'next' | 'prev') => {
     if (isAnimating) return;
 
     setIsAnimating(true);
@@ -238,6 +249,16 @@ function App() {
 
     setTimeout(() => setIsAnimating(false), 650);
   };
+
+  useEffect(() => {
+    const intervalId = globalThis.setInterval(() => {
+      if (!isAnimating) {
+        cycleCarousel('next');
+      }
+    }, 5000);
+
+    return () => globalThis.clearInterval(intervalId);
+  }, [isAnimating]);
 
   const totalItems = IMAGES.length;
   const centerIndex = activeIndex;
@@ -251,6 +272,16 @@ function App() {
   const brandRows = [0, 1, 2].map((rowIndex) =>
     brandLogos.filter((_, index) => index % 3 === rowIndex)
   );
+
+  const slugify = (value: string) =>
+    value
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)/g, '');
+
+  const goToCategory = (name: string) => {
+    routerNavigate(`/products#${slugify(name)}`);
+  };
 
   return (
     <div className="relative min-h-screen w-full overflow-y-auto overflow-x-hidden scroll-smooth bg-white text-black font-sans selection:bg-black selection:text-white">
@@ -283,13 +314,16 @@ function App() {
         <header className="relative z-20">
           <nav className="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
             {/* Logo */}
-            <a 
-              href="#home" 
-              onClick={(e) => { e.preventDefault(); scrollToSection('home'); }} 
+            <Link
+              to="/"
+              onClick={(e) => {
+                e.preventDefault();
+                scrollToSection('home');
+              }}
               className="font-serif text-3xl tracking-tight text-[#000000] select-none hover:opacity-85 transition-opacity"
             >
               Swastik &amp; Co.<sup className="text-xs font-sans align-super ml-0.5 select-none text-[#6F6F6F]">®</sup>
-            </a>
+            </Link>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
@@ -459,7 +493,7 @@ function App() {
                 {/* Premium Badge */}
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-bold uppercase tracking-widest text-[#917646] bg-[#917646]/[0.06] border border-[#917646]/10">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#917646]"></span>
-                  OUR LEGACY
+                  <span className="ml-2">OUR LEGACY</span>
                 </div>
                 {/* Heading */}
                 <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-black font-normal tracking-tight leading-tight">
@@ -651,16 +685,15 @@ function App() {
 
           <div className="absolute inset-0" style={{ zIndex: 3 }}>
             {IMAGES.map((item, index) => {
-              const role =
-                index === centerIndex
-                  ? 'center'
-                  : index === leftIndex
-                    ? 'left'
-                    : index === rightIndex
-                      ? 'right'
-                      : index === backIndex
-                        ? 'back'
-                        : 'hidden';
+              const getRole = () => {
+                if (index === centerIndex) return 'center';
+                if (index === leftIndex) return 'left';
+                if (index === rightIndex) return 'right';
+                if (index === backIndex) return 'back';
+                return 'hidden';
+              };
+
+              const role = getRole();
 
               const baseStyles: CSSProperties = {
                 position: 'absolute',
@@ -726,8 +759,25 @@ function App() {
                 },
               };
 
+              const isCenter = role === 'center';
+
               return (
-                <div key={item.src} style={{ ...baseStyles, ...roleStyles[role] }}>
+                <button
+                  key={item.src}
+                  type="button"
+                  disabled={!isCenter}
+                  aria-label={isCenter ? `View ${item.name} category` : undefined}
+                  style={{
+                    ...baseStyles,
+                    ...roleStyles[role],
+                    cursor: isCenter ? 'pointer' : 'default',
+                  }}
+                  onClick={() => {
+                    if (isCenter) {
+                      goToCategory(item.name);
+                    }
+                  }}
+                >
                   <img
                     src={item.src}
                     alt={item.name}
@@ -739,7 +789,7 @@ function App() {
                       objectPosition: 'center',
                     }}
                   />
-                </div>
+                </button>
               );
             })}
           </div>
@@ -764,7 +814,7 @@ function App() {
             <div className="flex items-center gap-4">
               <button
                 type="button"
-                onClick={() => navigate('prev')}
+                onClick={() => cycleCarousel('prev')}
                 className="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 border-white text-white transition-transform"
                 style={{
                   backgroundColor: 'transparent',
@@ -784,7 +834,7 @@ function App() {
               </button>
               <button
                 type="button"
-                onClick={() => navigate('next')}
+                onClick={() => cycleCarousel('next')}
                 className="flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-full border-2 border-white text-white transition-transform"
                 style={{
                   backgroundColor: 'transparent',
@@ -805,8 +855,8 @@ function App() {
             </div>
           </div>
 
-          <a
-            href="#"
+          <Link
+            to="/products"
             className="absolute bottom-6 right-4 sm:bottom-20 sm:right-10 flex items-center gap-3"
             style={{
               zIndex: 60,
@@ -828,9 +878,9 @@ function App() {
               event.currentTarget.style.opacity = '0.95';
             }}
           >
-            DISCOVER PRODUCTS
+            DISCOVER CATEGORIES
             <ArrowRight className="w-5 h-5 sm:w-8 sm:h-8" strokeWidth={2.25} />
-          </a>
+          </Link>
         </div>
 
       </section>
@@ -853,13 +903,14 @@ function App() {
 
             <div className="flex flex-col gap-6 sm:gap-8">
               {brandRows.map((row, rowIndex) => {
+                const rowKey = row[0] ?? `row-${rowIndex}`;
                 const marqueeClass =
                   rowIndex === 1 ? 'brands-track brands-track-right' : 'brands-track brands-track-left';
 
                 const track = row.length > 1 ? [...row, ...row] : row;
 
                 return (
-                  <div key={`brands-row-${rowIndex}`} className="brands-marquee">
+                  <div key={rowKey} className="brands-marquee">
                     <div className={marqueeClass}>
                       {track.map((logo, index) => (
                         <div key={`${logo}-${index}`} className="brands-item">
