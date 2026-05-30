@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import logoImg from './assets/brands/image.png';
 import lockImg from './assets/products/1. lock.webp';
 import doorHandleImg from './assets/products/2.Door Handles.webp';
 import hingesImg from './assets/products/3.Hinges.webp';
@@ -196,9 +197,10 @@ function ProductsPage() {
         <div className="max-w-6xl mx-auto px-6 sm:px-10 py-5 flex items-center justify-between">
           <Link
             to="/"
-            className="font-serif text-2xl sm:text-3xl tracking-tight text-black"
+            className="flex items-center font-serif text-2xl sm:text-3xl tracking-tight text-black select-none hover:opacity-85 transition-opacity"
           >
-            Swastik &amp; Co.<sup className="text-xs font-sans align-super ml-0.5 text-[#6F6F6F]">®</sup>
+            <img src={logoImg} alt="Logo" className="h-8 mr-2" />
+            Swastik &amp; Company
           </Link>
           <Link
             to="/"
@@ -286,19 +288,12 @@ function ProductsPage() {
                     />
                   </div>
                   <div className="mt-4 text-center">
-                    <div className="text-sm font-semibold text-black">{item.name}</div>
-                    <div className="mt-1 text-[11px] uppercase tracking-[0.25em] text-black/40">
-                      Trusted grade
-                    </div>
+                    <div className="text-lg font-semibold text-black">{item.name}</div>
+
                     <div className="mt-2 text-xs text-black/55 leading-relaxed">
                       {item.description}
                     </div>
-                    <Link
-                      to="/#enquiry"
-                      className="product-cta mt-4 inline-flex items-center justify-center rounded-full px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.25em] text-white transition-all"
-                    >
-                      Enquire Now
-                    </Link>
+<Link to="/#enquiry" className="mt-4 block inline-flex items-center justify-center rounded-full px-4 py-2 text-base font-semibold uppercase tracking-[0.25em] text-white bg-[#917646] transition-all hover:scale-[1.03] relative z-10">Enquire Now</Link>
                   </div>
                 </div>
               ))}

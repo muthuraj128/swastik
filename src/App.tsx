@@ -19,6 +19,7 @@ import modularKitchenImg from './assets/categories/Modular Kitchen Fittings.png'
 import plywoodLaminatesImg from './assets/categories/Plywood & Laminates.png';
 import slidingAluminiumImg from './assets/categories/Sliding & Aluminium Systems.png';
 import toolsIndustrialImg from './assets/categories/Tools & Industrial Hardware.png';
+import logoImg from './assets/brands/image.png';
 import './App.css';
 
 const brandModules = import.meta.glob('./assets/brands/*.webp', {
@@ -285,13 +286,13 @@ function App() {
 
   return (
     <div className="relative min-h-screen w-full overflow-y-auto overflow-x-hidden scroll-smooth bg-white text-black font-sans selection:bg-black selection:text-white">
-      
+
       {/* 1. HERO SECTION (100vh) */}
       <div id="home" className="relative h-screen w-full flex flex-col justify-between bg-white">
-        
+
         {/* Background showroom video layer (z-0) */}
-        <div 
-          className="absolute z-0 left-0 right-0 top-0 bottom-0 overflow-hidden pointer-events-none" 
+        <div
+          className="absolute z-0 left-0 right-0 top-0 bottom-0 overflow-hidden pointer-events-none"
         >
           <video
             ref={videoRef}
@@ -304,7 +305,7 @@ function App() {
             style={{ opacity: 0 }}
           />
           {/* Soft top-down white gradient overlay to fade the top half into the white page background */}
-          <div 
+          <div
             className="absolute inset-x-0 top-0 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-[1]"
             style={{ height: '55vh' }}
           ></div>
@@ -320,38 +321,24 @@ function App() {
                 e.preventDefault();
                 scrollToSection('home');
               }}
-              className="font-serif text-3xl tracking-tight text-[#000000] select-none hover:opacity-85 transition-opacity"
+              className="flex items-center font-serif text-3xl tracking-tight text-[#000000] select-none hover:opacity-85 transition-opacity"
             >
-              Swastik &amp; Co.<sup className="text-xs font-sans align-super ml-0.5 select-none text-[#6F6F6F]">®</sup>
+              <img src={logoImg} alt="Logo" className="h-8 mr-2" />
+              Swastik &amp; Company
             </Link>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center space-x-8">
-              <button onClick={() => scrollToSection('home')} className="text-sm font-medium text-[#000000] hover:opacity-75 transition-opacity cursor-pointer">
-                Home
-              </button>
-              <button onClick={() => scrollToSection('about')} className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] transition-colors cursor-pointer">
-                About Us
-              </button>
-              <a href="https://wa.me/919442466631" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] transition-colors">
-                Contact Our Team
-              </a>
-            </div>
-
-            {/* Desktop CTA Button */}
-            <div className="hidden md:block">
-              <a 
-                href="https://wa.me/919442466631" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="inline-block rounded-full px-6 py-2.5 text-sm font-medium bg-[#000000] text-white hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 ease-out"
-              >
-                WhatsApp Us
-              </a>
+              <button onClick={() => scrollToSection('home')} className="text-sm font-medium text-[#000000] hover:opacity-75 transition-opacity cursor-pointer">Home</button>
+              <button onClick={() => scrollToSection('about')} className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] transition-colors cursor-pointer">About Us</button>
+              <button onClick={() => scrollToSection('categories')} className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] transition-colors cursor-pointer">Categories</button>
+              <Link to="/products" className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] transition-colors cursor-pointer">Products</Link>
+              <button onClick={() => scrollToSection('enquiry')} className="text-sm font-medium text-[#6F6F6F] hover:text-[#000000] transition-colors cursor-pointer">Contact</button>
+              <a href="https://wa.me/919962470959" target="_blank" rel="noopener noreferrer" className="rounded-full bg-[#000000] text-white px-4 py-2 text-sm font-medium hover:scale-[1.03] active:scale-[0.98] transition-transform ml-4">WhatsApp Us</a>
             </div>
 
             {/* Mobile Menu Button */}
-            <button 
+            <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden flex flex-col justify-center items-center w-8 h-8 space-y-1.5 focus:outline-none"
               aria-label="Toggle menu"
@@ -365,27 +352,16 @@ function App() {
           {/* Mobile Menu Overlay */}
           {isMenuOpen && (
             <div className="md:hidden absolute top-20 left-0 right-0 mx-4 p-6 rounded-2xl glassmorphism z-30 flex flex-col space-y-4 animate-fade-rise">
-              <button onClick={() => scrollToSection('home')} className="text-left text-base font-medium text-[#000000] py-2 border-b border-black/5">
-                Home
-              </button>
-              <button onClick={() => scrollToSection('about')} className="text-left text-base font-medium text-[#6F6F6F] hover:text-[#000000] py-2 border-b border-black/5">
-                About Us
-              </button>
-              <a 
-                href="https://wa.me/919442466631" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                onClick={() => setIsMenuOpen(false)}
-                className="w-full text-center rounded-full py-3.5 text-base font-medium bg-[#000000] text-white hover:scale-[1.02] active:scale-[0.98] transition-transform mt-4"
-              >
-                WhatsApp Us Now
-              </a>
+              <button onClick={() => scrollToSection('categories')} className="text-left text-base font-medium text-[#000000] py-2 border-b border-black/5">Categories</button>
+              <Link to="/products" className="text-left text-base font-medium text-[#000000] py-2 border-b border-black/5">Products</Link>
+              <button onClick={() => scrollToSection('about')} className="text-left text-base font-medium text-[#6F6F6F] hover:text-[#000000] py-2 border-b border-black/5">About Us</button>
+              <button onClick={() => scrollToSection('enquiry')} className="w-full text-center rounded-full py-3.5 text-base font-medium bg-[#000000] text-white hover:scale-[1.02] active:scale-[0.98] transition-transform mt-4">Contact</button>
             </div>
           )}
         </header>
 
         {/* Hero Content Section (z-10) */}
-        <main 
+        <main
           className="relative z-10 flex-grow flex flex-col items-center justify-start text-center px-6"
           style={{ paddingTop: 'calc(6.5rem - 75px)' }}
         >
@@ -396,11 +372,11 @@ function App() {
             </h1>
 
             {/* Hero CTA Button */}
-            <button 
+            <button
               onClick={() => scrollToSection('about')}
               className="rounded-full px-14 py-5 text-base font-medium bg-[#000000] text-white hover:scale-[1.03] transition-transform duration-300 ease-out active:scale-[0.98] mt-12 shadow-lg shadow-black/5 hover:shadow-xl hover:shadow-black/10 cursor-pointer"
             >
-              Discover Swastik &amp; Co.
+              Discover Swastik &amp; Company
             </button>
           </div>
         </main>
@@ -428,8 +404,8 @@ function App() {
       </div>
 
       {/* 2. COMPACT & PROFESSIONAL BENTO LIGHT ABOUT US SECTION */}
-      <section 
-        id="about" 
+      <section
+        id="about"
         className="relative bg-[#FAF9F6] py-8 md:py-10 px-6 sm:px-8 border-t border-black/5 z-10 dot-pattern overflow-hidden min-h-fit flex items-center"
       >
         {/* Subtle mesh gradients in background for visual depth */}
@@ -438,23 +414,22 @@ function App() {
 
         <div className="w-full max-w-7xl mx-auto z-10 relative">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            
+
             {/* Bento Card 1: The Facade Card (Tall, spans 5 columns, takes 2 rows on desktop) */}
-            <div 
-              className={`about-card lg:col-span-5 lg:row-span-2 bento-card bento-card-lift overflow-hidden flex flex-col justify-between group min-h-[400px] md:min-h-[460px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${
-                isAboutVisible ? 'is-visible' : ''
-              }`}
+            <div
+              className={`about-card lg:col-span-5 lg:row-span-2 bento-card bento-card-lift overflow-hidden flex flex-col justify-between group min-h-[400px] md:min-h-[460px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
+                }`}
               style={{ transitionDelay: '100ms' }}
             >
               {/* Facade Image wrapper */}
               <div className="relative w-full flex-grow overflow-hidden bg-zinc-100 min-h-[220px] md:min-h-[280px]">
-                <img 
-                  src={facadeImg} 
-                  alt="Swastik & Company Facade" 
+                <img
+                  src={facadeImg}
+                  alt="Swastik & Company Facade"
                   className="w-full h-full object-cover object-[center_35%] transform scale-100 group-hover:scale-103 transition-transform duration-[1200ms] ease-out"
                 />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-[800ms]"></div>
-                
+
                 {/* Thin-stroke rotating badge stamp overlay */}
               </div>
 
@@ -467,9 +442,9 @@ function App() {
                 </p>
                 <div className="mt-3.5 pt-3 border-t border-black/5 flex justify-between items-center">
                   <span className="text-[11px] uppercase tracking-wider text-black/45 font-bold">Erode HQ 📍</span>
-                  <a 
-                    href="https://maps.google.com/?q=Swastik+and+Company+102+Nehru+Street+Erode" 
-                    target="_blank" 
+                  <a
+                    href="https://maps.google.com/?q=Swastik+and+Company+102+Nehru+Street+Erode"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#917646] hover:text-black transition-colors"
                   >
@@ -483,10 +458,9 @@ function App() {
             </div>
 
             {/* Bento Card 2: The Story Card (Wide, spans 7 columns) */}
-            <div 
-              className={`about-card lg:col-span-7 bento-card bento-card-lift p-6 md:p-8 flex flex-col justify-between min-h-[200px] md:min-h-[220px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${
-                isAboutVisible ? 'is-visible' : ''
-              }`}
+            <div
+              className={`about-card lg:col-span-7 bento-card bento-card-lift p-6 md:p-8 flex flex-col justify-between min-h-[200px] md:min-h-[220px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
+                }`}
               style={{ transitionDelay: '200ms' }}
             >
               <div className="space-y-3">
@@ -509,9 +483,9 @@ function App() {
               {/* Horizontal CTA Row */}
               <div className="pt-4 mt-4 border-t border-black/5 flex flex-wrap items-center justify-between gap-4">
                 <span className="text-[11px] text-black/40 font-medium">Have a project? Let's connect on WhatsApp.</span>
-                <a 
-                  href="https://wa.me/919442466631" 
-                  target="_blank" 
+                <a
+                  href="https://wa.me/919962470959"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-full px-5 py-2 text-xs font-semibold bg-[#000000] text-white hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-sm"
                 >
@@ -521,10 +495,9 @@ function App() {
             </div>
 
             {/* Bento Card 3: Key Metrics Card (Spans 3 columns) */}
-            <div 
-              className={`about-card lg:col-span-3 bento-card bento-card-lift p-6 flex flex-col justify-between min-h-[200px] md:min-h-[220px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${
-                isAboutVisible ? 'is-visible' : ''
-              }`}
+            <div
+              className={`about-card lg:col-span-3 bento-card bento-card-lift p-6 flex flex-col justify-between min-h-[200px] md:min-h-[220px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
+                }`}
               style={{ transitionDelay: '300ms' }}
             >
               <span className="text-[10px] font-bold uppercase tracking-widest text-black/40">Metrics</span>
@@ -562,10 +535,9 @@ function App() {
             </div>
 
             {/* Bento Card 4: Brand Pillars Card (Spans 4 columns) */}
-            <div 
-              className={`about-card lg:col-span-4 bento-card bento-card-lift p-6 flex flex-col justify-between min-h-[200px] md:min-h-[220px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${
-                isAboutVisible ? 'is-visible' : ''
-              }`}
+            <div
+              className={`about-card lg:col-span-4 bento-card bento-card-lift p-6 flex flex-col justify-between min-h-[200px] md:min-h-[220px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
+                }`}
               style={{ transitionDelay: '400ms' }}
             >
               <span className="text-[10px] font-bold uppercase tracking-widest text-black/40">Curations</span>
@@ -621,9 +593,8 @@ function App() {
             {TESTIMONIALS.map((item, index) => (
               <div
                 key={`${item.name}-${index}`}
-                className={`testimonial-card rounded-3xl border border-black/10 bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1 ${
-                  isTestimonialsVisible ? 'is-visible' : ''
-                }`}
+                className={`testimonial-card rounded-3xl border border-black/10 bg-white p-6 shadow-sm transition-transform duration-300 hover:-translate-y-1 ${isTestimonialsVisible ? 'is-visible' : ''
+                  }`}
               >
                 <div className="text-[#917646] text-sm tracking-[0.3em]">★★★★★</div>
                 <p className="mt-3 text-sm text-black/70 leading-relaxed">{item.quote}</p>
@@ -635,6 +606,7 @@ function App() {
       </section>
 
       <section
+        id="categories"
         className="relative w-full overflow-hidden"
         style={{
           backgroundColor: IMAGES[activeIndex].bg,
@@ -941,9 +913,8 @@ function App() {
             </p>
           </div>
           <div
-            className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch transition-all duration-700 ${
-              isEnquiryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-            }`}
+            className={`grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch transition-all duration-700 ${isEnquiryVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+              }`}
           >
             <div className="w-full h-full">
               <div className="h-full rounded-3xl border border-black/10 overflow-hidden bg-white shadow-sm transition-transform duration-300 hover:-translate-y-1">
@@ -1043,7 +1014,7 @@ function App() {
                     Submit Now
                   </button>
                   <a
-                    href="https://wa.me/919442466631"
+                    href="https://wa.me/919962470959"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-full border border-black/20 px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-black hover:text-white"
@@ -1059,7 +1030,7 @@ function App() {
                         d="M12.05 2.02c-5.52 0-10 4.48-10 10 0 1.73.45 3.42 1.31 4.92L2 22l5.22-1.37c1.45.79 3.08 1.2 4.79 1.2 5.52 0 10-4.48 10-10 0-5.52-4.48-10-9.96-10zm5.93 14.54c-.25.7-1.23 1.28-1.93 1.38-.48.08-1.09.12-3.56-.76-3.16-1.11-5.2-4.35-5.36-4.57-.16-.22-1.3-1.74-1.3-3.32 0-1.58.82-2.35 1.11-2.67.29-.32.63-.4.84-.4h.6c.19 0 .44-.07.69.53.25.6.86 2.08.94 2.23.08.16.13.35.02.57-.11.22-.17.35-.33.54-.16.19-.35.42-.5.56-.16.14-.32.3-.14.6.19.3.84 1.38 1.8 2.24 1.24 1.1 2.29 1.44 2.62 1.6.32.16.52.14.71-.08.19-.22.82-.95 1.04-1.28.22-.33.44-.27.74-.16.3.11 1.9.9 2.23 1.06.33.16.55.24.63.37.08.13.08.74-.17 1.44z"
                       />
                     </svg>
-                    WhatsApp
+                    WhatsApp Us
                   </a>
                 </div>
               </form>
@@ -1068,20 +1039,57 @@ function App() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black text-white/50 py-16 px-8 border-t border-white/5 relative z-10">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-center md:text-left">
-            <span className="font-serif text-5xl text-white select-none">ஸ்வஸ்திக் &amp; கம்பனி</span>
-            <p className="text-xs mt-1">© 1991–2026 Swastik &amp; Company. All rights reserved.</p>
-            <p className="text-[10px] text-white/30 mt-1">Erode Fort, Tamil Nadu, India</p>
+      <footer className="bg-black text-white py-16 px-8 border-t border-white/5 relative z-10">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+          <div>
+            <h4 className="text-xl font-serif mb-4">Swastik &amp; Company</h4>
+            <p className="text-sm opacity-80">
+              Swastik and Company, established in 1991 in Erode, is a trusted hardware and plywood store known for quality products and reliable service.
+            </p>
+          </div>
+          <div>
+            <h4 className="text-lg font-medium mb-3">Quick Links</h4>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#home" className="hover:underline">Home</a></li>
+              <li><a href="#about" className="hover:underline">About Us</a></li>
+              <li><a href="/products" className="hover:underline">Our Products</a></li>
+              <li><a href="#enquiry" className="hover:underline">Contact Us</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-lg font-medium mb-3">Products</h4>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#door-hardware" className="hover:underline">Door Hardware</a></li>
+              <li><a href="#plywood-boards" className="hover:underline">Plywood &amp; Boards</a></li>
+              <li><a href="#kitchen-fittings" className="hover:underline">Kitchen Fittings</a></li>
+              <li><a href="#bathroom-glass" className="hover:underline">Bathroom &amp; Glass</a></li>
+              <li><a href="#tools-industrial" className="hover:underline">Tools &amp; Industrial</a></li>
+              <li><a href="#sliding-aluminium" className="hover:underline">Sliding &amp; Aluminium</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-lg font-medium mb-3">Contact Info</h4>
+            <p className="text-sm opacity-80">
+              102, Nehru Street, Erode Fort, Tamil Nadu - 638001<br />
+              <a href="tel:+919962470959" className="block hover:underline">+91 9962470959</a>
+              <a href="mailto:swastikandco@gmail.com" className="block hover:underline">swastikandco@gmail.com</a>
+            </p>
+            <div className="mt-4 flex space-x-3 text-sm">
+              <a href="https://www.instagram.com/swastik_and_company?igsh=dnV3eWF1NmowcjJt&utm_source=qr" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">Instagram</a>
+              <a href="https://www.linkedin.com/in/swastik-and-company-b027aa410?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener noreferrer" className="hover:opacity-80">LinkedIn</a>
+            </div>
+          </div>
+        </div>
+        <div className="mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-xs opacity-60">
+            © {new Date().getFullYear()} Swastik &amp; Company. All rights reserved.
           </div>
           <div className="flex gap-6 text-xs text-white/40">
             <button onClick={() => scrollToSection('home')} className="hover:text-white transition-colors cursor-pointer">Back to Top</button>
             <span>•</span>
-            <a href="tel:+919442466631" className="hover:text-white transition-colors">Call Us</a>
+            <a href="tel:+919962470959" className="hover:text-white transition-colors">Call Us</a>
             <span>•</span>
-            <a href="https://wa.me/919442466631" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">WhatsApp</a>
+            <a href="https://wa.me/919962470959" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">WhatsApp</a>
           </div>
         </div>
       </footer>
