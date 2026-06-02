@@ -13,12 +13,10 @@ import {
   Layers,
 } from 'lucide-react';
 import facadeImg from './assets/facade.jpg';
-import bathroomGlassImg from './assets/categories/Bathroom & Glass Fittings.png';
 import doorHardwareImg from './assets/categories/door hardware.png';
 import modularKitchenImg from './assets/categories/Modular Kitchen Fittings.png';
 import plywoodLaminatesImg from './assets/categories/Plywood & Laminates.png';
 import slidingAluminiumImg from './assets/categories/Sliding & Aluminium Systems.png';
-import toolsIndustrialImg from './assets/categories/Tools & Industrial Hardware.png';
 import logoImg from './assets/brands/image.png';
 import './App.css';
 
@@ -52,16 +50,6 @@ const IMAGES = [
     name: 'Kitchen Fittings',
     src: modularKitchenImg,
     bg: '#7E8FA5',
-  },
-  {
-    name: 'Bathroom & Glass Fittings',
-    src: bathroomGlassImg,
-    bg: '#7BA6AD',
-  },
-  {
-    name: 'Tools & Industrial Hardware',
-    src: toolsIndustrialImg,
-    bg: '#6C6A68',
   },
   {
     name: 'Sliding & Aluminium Systems',
@@ -259,7 +247,7 @@ function App() {
       if (!isAnimating) {
         cycleCarousel('next');
       }
-    }, 5000);
+    }, 3000);
 
     return () => globalThis.clearInterval(intervalId);
   }, [isAnimating]);
@@ -427,7 +415,7 @@ function App() {
 
             {/* Bento Card 1: The Facade Card (Tall, spans 5 columns, takes 2 rows on desktop) */}
             <div
-              className={`about-card lg:col-span-5 lg:row-span-2 bento-card bento-card-lift overflow-hidden flex flex-col justify-between group min-h-[400px] md:min-h-[460px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
+              className={`about-card lg:col-span-5 lg:row-span-2 bento-card bento-card-lift overflow-hidden flex flex-col justify-between group min-h-[320px] md:min-h-[380px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
                 }`}
               style={{ transitionDelay: '100ms' }}
             >
@@ -467,46 +455,76 @@ function App() {
               </div>
             </div>
 
-            {/* Bento Card 2: The Story Card (Wide, spans 7 columns) */}
-            <div
-              className={`about-card lg:col-span-7 bento-card bento-card-lift p-6 md:p-8 flex flex-col justify-between min-h-[200px] md:min-h-[220px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
-                }`}
-              style={{ transitionDelay: '200ms' }}
-            >
-              <div className="space-y-3">
-                {/* Premium Badge */}
-                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-bold uppercase tracking-widest text-[#917646] bg-[#917646]/[0.06] border border-[#917646]/10">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#917646]"></span>
-                  <span className="ml-2">எங்கள் பாரம்பரியம்</span>
+            {/* Bento Card 2: Story Cards Wrapper */}
+            <div className="lg:col-span-7 grid grid-cols-1 gap-6">
+              <div
+                className={`about-card bento-card bento-card-lift p-6 md:p-8 flex flex-col justify-between min-h-[200px] md:min-h-[220px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
+                  }`}
+                style={{ transitionDelay: '200ms' }}
+              >
+                <div className="space-y-3">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-bold uppercase tracking-widest text-[#917646] bg-[#917646]/[0.06] border border-[#917646]/10">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#917646]"></span>
+                    <span className="ml-2">எங்கள் பாரம்பரியம்</span>
+                  </div>
+                  <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-black font-normal tracking-tight leading-tight">
+                    30 ஆண்டுகளுக்கும் மேல் தரத்தின் உச்சம் &amp; <br className="hidden md:inline" />
+                    <span className="text-gradient-gold italic font-light">கட்டிட நம்பிக்கை.</span>
+                  </h2>
+                  <p className="text-black/80 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
+                    1991 முதல், ஸ்வஸ்திக் &amp; கம்பனி ஈரோட்டின் முன்னணி கட்டிடக்காரர்கள் மற்றும் வடிவமைப்பாளர்களுக்காக உயர்தர கட்டிட ஹார்ட்வேர், பிரீமியம் பிளைவுட், டிசைனர் லாமினேட்டுகள், மற்றும் மாடுலர் சமையலறைகள் ஆகியவற்றைத் தேர்ந்து வழங்கி வருகிறது. வடிவமைப்பு பார்வையும் நீடித்த தரமும் இடையிலான இடைவெளியை நாங்கள் நிரப்புகிறோம்.
+                  </p>
                 </div>
-                {/* Heading */}
-                <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-black font-normal tracking-tight leading-tight">
-                  30 ஆண்டுகளுக்கும் மேல் தரத்தின் உச்சம் &amp; <br className="hidden md:inline" />
-                  <span className="text-gradient-gold italic font-light">கட்டிட நம்பிக்கை.</span>
-                </h2>
-                {/* Narrative */}
-                <p className="text-black/80 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
-                  1991 முதல், ஸ்வஸ்திக் &amp; கம்பனி ஈரோட்டின் முன்னணி கட்டிடக்காரர்கள் மற்றும் வடிவமைப்பாளர்களுக்காக உயர்தர கட்டிட ஹார்ட்வேர், பிரீமியம் பிளைவுட், டிசைனர் லாமினேட்டுகள், மற்றும் மாடுலர் சமையலறைகள் ஆகியவற்றைத் தேர்ந்து வழங்கி வருகிறது. வடிவமைப்பு பார்வையும் நீடித்த தரமும் இடையிலான இடைவெளியை நாங்கள் நிரப்புகிறோம்.
-                </p>
+
+                <div className="pt-4 mt-4 border-t border-black/5 flex flex-wrap items-center justify-between gap-4">
+                  <span className="text-[11px] text-black/40 font-medium">Have a project? Let's connect on WhatsApp.</span>
+                  <a
+                    href="https://wa.me/919962470959"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full px-5 py-2 text-xs font-semibold bg-[#000000] text-white hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-sm"
+                  >
+                    WhatsApp Us Now
+                  </a>
+                </div>
               </div>
 
-              {/* Horizontal CTA Row */}
-              <div className="pt-4 mt-4 border-t border-black/5 flex flex-wrap items-center justify-between gap-4">
-                <span className="text-[11px] text-black/40 font-medium">Have a project? Let's connect on WhatsApp.</span>
-                <a
-                  href="https://wa.me/919962470959"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-full px-5 py-2 text-xs font-semibold bg-[#000000] text-white hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-sm"
-                >
-                  WhatsApp Us Now
-                </a>
+              <div
+                className={`about-card bento-card bento-card-lift p-6 md:p-8 flex flex-col justify-between min-h-[170px] md:min-h-[190px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
+                  }`}
+                style={{ transitionDelay: '250ms' }}
+              >
+                <div className="space-y-3">
+                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-bold uppercase tracking-widest text-[#917646] bg-[#917646]/[0.06] border border-[#917646]/10">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#917646]"></span>
+                    <span className="ml-2">Our Legacy</span>
+                  </div>
+                  <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-black font-normal tracking-tight leading-tight">
+                    Over 30 years of premium quality &amp; <br className="hidden md:inline" />
+                    <span className="text-gradient-gold italic font-light">building trust.</span>
+                  </h2>
+                  <p className="text-black/80 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
+                    Since 1991, Swastik &amp; Company has been carefully selecting and supplying high-quality building hardware, premium plywood, designer laminates, and modular kitchens for Erode’s leading builders and designers. We bridge the gap between design vision and lasting quality.
+                  </p>
+                </div>
+
+                <div className="pt-4 mt-4 border-t border-black/5 flex flex-wrap items-center justify-between gap-4">
+                  <span className="text-[11px] text-black/40 font-medium">Have a project? Let's connect on WhatsApp.</span>
+                  <a
+                    href="https://wa.me/919962470959"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full px-5 py-2 text-xs font-semibold bg-[#000000] text-white hover:scale-[1.03] active:scale-[0.98] transition-all duration-300 shadow-sm"
+                  >
+                    WhatsApp Us Now
+                  </a>
+                </div>
               </div>
             </div>
 
-            {/* Bento Card 3: Key Metrics Card (Spans 3 columns) */}
+            {/* Bento Card 4: Key Metrics Card (Spans 3 columns) */}
             <div
-              className={`about-card lg:col-span-3 bento-card bento-card-lift p-6 flex flex-col justify-between min-h-[200px] md:min-h-[220px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
+              className={`about-card lg:col-span-3 bento-card bento-card-lift p-6 flex flex-col justify-between min-h-[170px] md:min-h-[190px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
                 }`}
               style={{ transitionDelay: '300ms' }}
             >
@@ -546,7 +564,7 @@ function App() {
 
             {/* Bento Card 4: Brand Pillars Card (Spans 4 columns) */}
             <div
-              className={`about-card lg:col-span-4 bento-card bento-card-lift p-6 flex flex-col justify-between min-h-[200px] md:min-h-[220px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
+              className={`about-card lg:col-span-4 bento-card bento-card-lift p-6 flex flex-col justify-between min-h-[170px] md:min-h-[190px] transition-all duration-[900ms] cubic-bezier(0.16, 1, 0.3, 1) transform ${isAboutVisible ? 'is-visible' : ''
                 }`}
               style={{ transitionDelay: '400ms' }}
             >
@@ -1072,8 +1090,6 @@ function App() {
               <li><a href="#door-hardware" className="hover:underline">Door Hardware</a></li>
               <li><a href="#plywood-boards" className="hover:underline">Plywood &amp; Boards</a></li>
               <li><a href="#kitchen-fittings" className="hover:underline">Kitchen Fittings</a></li>
-              <li><a href="#bathroom-glass" className="hover:underline">Bathroom &amp; Glass</a></li>
-              <li><a href="#tools-industrial" className="hover:underline">Tools &amp; Industrial</a></li>
               <li><a href="#sliding-aluminium" className="hover:underline">Sliding &amp; Aluminium</a></li>
             </ul>
           </div>

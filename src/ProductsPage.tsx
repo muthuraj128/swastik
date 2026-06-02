@@ -12,14 +12,6 @@ import chimneyImg from './assets/products/9.Chimney.webp';
 import drawerSystemsImg from './assets/products/10.Drawer Systems.webp';
 import drawerChannelsImg from './assets/products/11. drawer channels.webp';
 import cabinetAccessoriesImg from './assets/products/12.Cabinet Accessories.webp';
-import bathroomAccessoriesImg from './assets/products/13.Bathroom Accessories.webp';
-import faucetsShowersImg from './assets/products/14.Faucets & Showers.webp';
-import sanitaryFittingsImg from './assets/products/15.Sanitary Fittings.webp';
-import glassFittingsImg from './assets/products/16.Glass Fittings.webp';
-import powerToolsImg from './assets/products/17.Power Tools.webp';
-import handToolsImg from './assets/products/18.hand tool.webp';
-import fastenersImg from './assets/products/19.Fasteners.webp';
-import cuttingToolsImg from './assets/products/20.Cutting & Drilling Tools.webp';
 import slidingDoorImg from './assets/products/21.Sliding Door Systems.webp';
 import windowSystemsImg from './assets/products/22.Window Systems.webp';
 import tracksImg from './assets/products/23.Tracks.webp';
@@ -98,56 +90,6 @@ const CATEGORIES = [
         name: 'Cabinet Accessories',
         image: cabinetAccessoriesImg,
         description: 'Practical accessories to organize and maximize cabinet storage',
-      },
-    ],
-  },
-  {
-    name: 'Bathroom & Glass Fittings',
-    items: [
-      {
-        name: 'Bathroom Accessories',
-        image: bathroomAccessoriesImg,
-        description: 'Wide range including towel rods, soap dishes, holders, and shelves',
-      },
-      {
-        name: 'Faucets & Showers',
-        image: faucetsShowersImg,
-        description: 'Wide range: mixers, wall mixers, shower heads, and hand showers',
-      },
-      {
-        name: 'Sanitary Fittings',
-        image: sanitaryFittingsImg,
-        description: 'Wide range including wash basins, toilets, flush tanks, and urinals',
-      },
-      {
-        name: 'Glass Fittings',
-        image: glassFittingsImg,
-        description: 'Wide range: glass hinges, clamps, connectors, and patch fittings',
-      },
-    ],
-  },
-  {
-    name: 'Tools & Industrial Hardware',
-    items: [
-      {
-        name: 'Power Tools',
-        image: powerToolsImg,
-        description: 'Wide range including drills, grinders, saws, and impact tools',
-      },
-      {
-        name: 'Hand Tools',
-        image: handToolsImg,
-        description: 'Wide range including hammers, screwdrivers, spanners, and pliers',
-      },
-      {
-        name: 'Fasteners',
-        image: fastenersImg,
-        description: 'Wide range including nuts, bolts, screws, washers, and anchors',
-      },
-      {
-        name: 'Cutting & Drilling Tools',
-        image: cuttingToolsImg,
-        description: 'Wide range: drill bits, hole saws, cutting blades, and hacksaws',
       },
     ],
   },
