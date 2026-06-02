@@ -1,4 +1,5 @@
-import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import logoImg from './assets/brands/image.png';
 import lockImg from './assets/products/1. lock.webp';
 import doorHandleImg from './assets/products/2.Door Handles.webp';
@@ -127,6 +128,26 @@ const slugify = (value: string) =>
     .replace(/(^-|-$)/g, '');
 
 function ProductsPage() {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const id = location.hash.slice(1);
+    const scrollToHash = () => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    // Attempt immediately, then again after render in case the element is not yet in DOM.
+    scrollToHash();
+    const timeout = window.setTimeout(scrollToHash, 100);
+
+    return () => window.clearTimeout(timeout);
+  }, [location.hash]);
+
   return (
     <div className="relative min-h-screen bg-[#F6F1EA] text-black overflow-hidden">
       <div className="pointer-events-none absolute inset-0">

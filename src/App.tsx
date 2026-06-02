@@ -1087,10 +1087,10 @@ function App() {
           <div>
             <h4 className="text-lg font-medium mb-3">Products</h4>
             <ul className="space-y-2 text-sm">
-              <li><a href="#door-hardware" className="hover:underline">Door Hardware</a></li>
-              <li><a href="#plywood-boards" className="hover:underline">Plywood &amp; Boards</a></li>
-              <li><a href="#kitchen-fittings" className="hover:underline">Kitchen Fittings</a></li>
-              <li><a href="#sliding-aluminium" className="hover:underline">Sliding &amp; Aluminium</a></li>
+              <li><a href="/products#door-hardware" className="hover:underline">Door Hardware</a></li>
+              <li><a href="/products#plywood-boards" className="hover:underline">Plywood &amp; Boards</a></li>
+              <li><a href="/products#kitchen-fittings" className="hover:underline">Kitchen Fittings</a></li>
+              <li><a href="/products#sliding-aluminium-systems" className="hover:underline">Sliding &amp; Aluminium</a></li>
             </ul>
           </div>
           <div>
