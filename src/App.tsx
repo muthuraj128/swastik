@@ -22,11 +22,19 @@ import toolsIndustrialImg from './assets/categories/Tools & Industrial Hardware.
 import logoImg from './assets/brands/image.png';
 import './App.css';
 
-const brandModules = import.meta.glob('./assets/brands/*.webp', {
+const mobileShot1 = new URL('../video/mobile shot (1).mp4', import.meta.url).href;
+const mobileShot2 = new URL('../video/mobile shot (2).mp4', import.meta.url).href;
+const mobileShot3 = new URL('../video/mobile shot (3).mp4', import.meta.url).href;
+const horizontalShot3 = new URL('../video/horizontal shot (3).mp4', import.meta.url).href;
+
+const brandModules = import.meta.glob('./assets/brands/*.{webp,png}', {
   eager: true,
   import: 'default',
 }) as Record<string, string>;
-const brandLogos = Object.values(brandModules).sort((a, b) => a.localeCompare(b));
+const brandLogos = Object.entries(brandModules)
+  .filter(([path]) => !path.endsWith('/image.png'))
+  .map(([, src]) => src)
+  .sort((a, b) => a.localeCompare(b));
 
 const IMAGES = [
   {
@@ -94,13 +102,16 @@ function App() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 640);
+  const [videoIndex, setVideoIndex] = useState(0);
+
+  const heroVideos = isMobile
+    ? [mobileShot1, mobileShot2, mobileShot3]
+    : [mobileShot1, mobileShot2, horizontalShot3];
+  const currentVideo = heroVideos[videoIndex % heroVideos.length];
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-
-    // Slow down video playback to 0.75x speed
-    video.playbackRate = 0.75;
 
     let animationFrameId: number;
 
@@ -140,7 +151,7 @@ function App() {
     return () => {
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [currentVideo]);
 
   useEffect(() => {
     IMAGES.forEach((image) => {
@@ -221,16 +232,8 @@ function App() {
     const video = videoRef.current;
     if (!video) return;
 
-    // On ended event: set opacity to 0, wait 100ms, reset currentTime = 0, then play() again
     video.style.opacity = '0';
-
-    setTimeout(() => {
-      video.currentTime = 0;
-      video.playbackRate = 0.75; // Keep video slowed down on loop restart
-      video.play().catch((err) => {
-        console.error('Video loop restart failed:', err);
-      });
-    }, 100);
+    setVideoIndex((prev) => (prev + 1) % heroVideos.length);
   };
 
   const scrollToSection = (id: string) => {
@@ -296,13 +299,20 @@ function App() {
         >
           <video
             ref={videoRef}
-            src="/showroom.mp4"
-            className="w-full h-full object-cover object-bottom"
+            key={currentVideo}
+            src={currentVideo}
+            className="w-full h-full object-cover"
             muted
             playsInline
             autoPlay
             onEnded={handleEnded}
-            style={{ opacity: 0 }}
+            style={{
+              opacity: 0,
+              objectPosition:
+                !isMobile && (currentVideo === mobileShot1 || currentVideo === mobileShot2)
+                  ? 'center center'
+                  : 'center bottom',
+            }}
           />
           {/* Soft top-down white gradient overlay to fade the top half into the white page background */}
           <div
@@ -467,16 +477,16 @@ function App() {
                 {/* Premium Badge */}
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-bold uppercase tracking-widest text-[#917646] bg-[#917646]/[0.06] border border-[#917646]/10">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#917646]"></span>
-                  <span className="ml-2">OUR LEGACY</span>
+                  <span className="ml-2">எங்கள் பாரம்பரியம்</span>
                 </div>
                 {/* Heading */}
                 <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-black font-normal tracking-tight leading-tight">
-                  Three Decades of Premium Materials &amp; <br className="hidden md:inline" />
-                  <span className="text-gradient-gold italic font-light">Architectural Trust.</span>
+                  30 ஆண்டுகளுக்கும் மேல் தரத்தின் உச்சம் &amp; <br className="hidden md:inline" />
+                  <span className="text-gradient-gold italic font-light">கட்டிட நம்பிக்கை.</span>
                 </h2>
                 {/* Narrative */}
                 <p className="text-black/80 text-base sm:text-lg leading-relaxed max-w-2xl font-light">
-                  Since 1991, Swastik &amp; Company has curated the finest architectural hardware, premium plywood, designer laminates, and modular kitchens for Erode's premium builders and designers. We bridge the gap between design vision and physical durability.
+                  1991 முதல், ஸ்வஸ்திக் &amp; கம்பனி ஈரோட்டின் முன்னணி கட்டிடக்காரர்கள் மற்றும் வடிவமைப்பாளர்களுக்காக உயர்தர கட்டிட ஹார்ட்வேர், பிரீமியம் பிளைவுட், டிசைனர் லாமினேட்டுகள், மற்றும் மாடுலர் சமையலறைகள் ஆகியவற்றைத் தேர்ந்து வழங்கி வருகிறது. வடிவமைப்பு பார்வையும் நீடித்த தரமும் இடையிலான இடைவெளியை நாங்கள் நிரப்புகிறோம்.
                 </p>
               </div>
 
