@@ -91,6 +91,7 @@ function App() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(() => window.innerWidth < 640);
   const [videoIndex, setVideoIndex] = useState(0);
+  const [videoReady, setVideoReady] = useState(false);
 
   const heroVideos = isMobile
     ? [mobileShot1, mobileShot2, mobileShot3]
@@ -220,6 +221,7 @@ function App() {
     const video = videoRef.current;
     if (!video) return;
 
+    setVideoReady(false);
     video.style.opacity = '0';
     setVideoIndex((prev) => (prev + 1) % heroVideos.length);
   };
@@ -293,9 +295,13 @@ function App() {
             muted
             playsInline
             autoPlay
+            preload="auto"
+            onLoadedMetadata={() => setVideoReady(true)}
+            onCanPlay={() => setVideoReady(true)}
             onEnded={handleEnded}
             style={{
-              opacity: 0,
+              opacity: videoReady ? 1 : 0,
+              transition: 'opacity 0.35s ease-in-out',
               objectPosition:
                 !isMobile && (currentVideo === mobileShot1 || currentVideo === mobileShot2)
                   ? 'center center'
