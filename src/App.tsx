@@ -226,6 +226,10 @@ function App() {
     setVideoIndex((prev) => (prev + 1) % heroVideos.length);
   };
 
+  const handleVideoReady = () => {
+    setVideoReady(true);
+  };
+
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -296,9 +300,14 @@ function App() {
             playsInline
             autoPlay
             preload="auto"
-            onLoadedMetadata={() => setVideoReady(true)}
-            onCanPlay={() => setVideoReady(true)}
+            onLoadedMetadata={handleVideoReady}
+            onCanPlay={handleVideoReady}
             onEnded={handleEnded}
+            onError={() => {
+              if (videoRef.current) {
+                videoRef.current.style.opacity = '0';
+              }
+            }}
             style={{
               opacity: videoReady ? 1 : 0,
               transition: 'opacity 0.35s ease-in-out',
@@ -307,7 +316,9 @@ function App() {
                   ? 'center center'
                   : 'center bottom',
             }}
-          />
+          >
+            <source src={currentVideo} type="video/mp4" />
+          </video>
           {/* Soft top-down white gradient overlay to fade the top half into the white page background */}
           <div
             className="absolute inset-x-0 top-0 bg-gradient-to-b from-white via-white/80 to-transparent pointer-events-none z-[1]"
